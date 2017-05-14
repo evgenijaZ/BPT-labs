@@ -1,6 +1,6 @@
 package com.company;
 
-public class Word {
+class Word {
     private Letter[] letters = null;
 
     Word(StringBuffer word) {
@@ -10,7 +10,7 @@ public class Word {
         }
     }
 
-    public void printWord() {
+    void printWord() {
         if (letters != null) {
             for (Letter letter : letters) {
                 System.out.print(letter.getValue());
@@ -24,7 +24,5 @@ public class Word {
     char getCharAt(int position){
         return this.letters[position].getValue();
     }
-    public Letter getLetterAt(int position){
-        return this.letters[position];
-    }
+
 }

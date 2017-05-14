@@ -1,10 +1,14 @@
 package com.company;
 
 
-public class Delimiter {
+class Delimiter {
     private char value;
 
-    public Delimiter(char character) {
+    char getValue() {
+        return value;
+    }
+
+    Delimiter(char character) {
         this.value = character;
     }
 }

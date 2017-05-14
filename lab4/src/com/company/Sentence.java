@@ -42,10 +42,7 @@ class Sentence {
         } else System.out.println("Line is empty");
     }
 
-
-//    public Word getWordAt(int position) {
-//        return this.words[position];
-//    }
+    
 
     void replaceFirstAndLastWords() {
         if (words != null) {
