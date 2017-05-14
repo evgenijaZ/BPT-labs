@@ -87,7 +87,6 @@ class Sentence {
                 }
             }
             if (string.charAt(string.length() - 1) == ' ') string.deleteCharAt(string.length() - 1);
-            if (string.charAt(string.length() - 2) == ' ') string.deleteCharAt(string.length() - 2);
         }
     }
 
