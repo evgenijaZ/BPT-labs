@@ -9,7 +9,8 @@ class Sentence {
             Clean(sentence);
             if (!isDelimiter(sentence.charAt(sentence.length() - 1))) {
                 sentence.append('.');
-            } else delimiter = new Delimiter(sentence.charAt(sentence.length() - 1));
+            }
+            else delimiter = new Delimiter(sentence.charAt(sentence.length() - 1));
             words = new Word[countWords(sentence)];
             StringBuffer word;
             int j = 0;
@@ -39,10 +40,9 @@ class Sentence {
                 j++;
             }
             while (j < words.length);
-        } else System.out.println("Line is empty");
+        }
     }
 
-    
 
     void replaceFirstAndLastWords() {
         if (words != null) {
@@ -52,12 +52,13 @@ class Sentence {
 
         }
     }
-    void printSentence(){
-        for (int i = 0; i<words.length; i++){
+
+    void printSentence() {
+        for (int i = 0; i < words.length; i++) {
+            if (i > 0 && words[i].getCharAt(0)!=',') System.out.print(' ');
             words[i].printWord();
-            if(i!=words.length-1) System.out.print(' ');
         }
-        System.out.println(delimiter.getValue());
+        if (delimiter != null) System.out.print(delimiter.getValue()+" ");
     }
 
     private int countWords(StringBuffer string) {
@@ -73,6 +74,10 @@ class Sentence {
     private void Clean(StringBuffer string) {
         if (string != null) {
             for (int i = 0; i < string.length(); i++) {
+                if (string.charAt(i) ==','){
+                    string.insert(i,' ');
+                    i++;
+                }
                 if (string.charAt(i) == '\t') {
                     string.setCharAt(i, ' ');
                 }
@@ -81,8 +86,8 @@ class Sentence {
                     i--;
                 }
             }
-            if(string.charAt(string.length()-1)==' ') string.deleteCharAt(string.length()-1);
-            if(string.charAt(string.length()-2)==' ') string.deleteCharAt(string.length()-2);
+            if (string.charAt(string.length() - 1) == ' ') string.deleteCharAt(string.length() - 1);
+            if (string.charAt(string.length() - 2) == ' ') string.deleteCharAt(string.length() - 2);
         }
     }
 

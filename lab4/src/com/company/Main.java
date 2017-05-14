@@ -8,9 +8,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.println("Input text:");
         StringBuffer sb = new StringBuffer(sc.nextLine());
-        Sentence s = new Sentence(sb);
-        s.replaceFirstAndLastWords();
+        Text s = new Text(sb);
         System.out.println("Result is:");
-        s.printSentence();
+        s.replaceFirstAndLastWords();
+        s.printText();
     }
 }
