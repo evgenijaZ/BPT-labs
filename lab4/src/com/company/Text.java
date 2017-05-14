@@ -20,7 +20,7 @@ class Text {
                     }
                     if (isDelimiter(text.charAt(i)) && (i - start > 0) && (start != -1)) {
                         end = i;
-                        if (i+1 <= text.length()) end++;
+                        if (i + 1 <= text.length()) end++;
                         break;
                     }
                 }
@@ -32,7 +32,7 @@ class Text {
                     text = new StringBuffer(text.substring(end, text.length()));
                 }
                 j++;
-            }  while (j < sentences.length);
+            } while (j < sentences.length);
         } else System.out.println("Line is empty");
 
     }
@@ -55,8 +55,8 @@ class Text {
         return false;
     }
 
-    void replaceFirstAndLastWords(){
-        if(sentences!=null){
+    void replaceFirstAndLastWords() {
+        if (sentences != null) {
             for (Sentence sentence : sentences) {
                 sentence.replaceFirstAndLastWords();
             }
@@ -64,8 +64,8 @@ class Text {
     }
 
 
-    void printText(){
-        if(sentences!=null){
+    void printText() {
+        if (sentences != null) {
             for (Sentence sentence : sentences) {
                 sentence.printSentence();
             }

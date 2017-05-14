@@ -17,11 +17,12 @@ class Word {
             }
         }
     }
-    int length(){
+
+    int length() {
         return this.letters.length;
     }
 
-    char getCharAt(int position){
+    char getCharAt(int position) {
         return this.letters[position].getValue();
     }
 
