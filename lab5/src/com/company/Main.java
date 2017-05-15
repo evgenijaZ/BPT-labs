@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Album Disc = new Album();
-        Disc.activate();
         Disc.add("Don't Stop", "pop", 215);
         Disc.add("Let's not pretended", "rock", 230);
         Disc.add("Mister,Mister", "indie", 215);
