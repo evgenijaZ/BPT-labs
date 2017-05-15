@@ -19,7 +19,7 @@ class Album {
     Song getSearchResult(int i) {
         return searchResult.get(i);
     }
-    
+
 
     int size() {
         return this.storage.size();
