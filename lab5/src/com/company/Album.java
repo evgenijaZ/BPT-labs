@@ -7,6 +7,11 @@ class Album {
     private ArrayList <Song> storage;
     private ArrayList <Song> searchResult;
 
+    public Album() {
+        if (this.storage == null)
+            this.storage = new ArrayList <>();
+    }
+
     ArrayList <Song> getSearchResult() {
         return searchResult;
     }
@@ -14,11 +19,7 @@ class Album {
     Song getSearchResult(int i) {
         return searchResult.get(i);
     }
-
-    void activate() {
-        if (this.storage == null)
-            this.storage = new ArrayList <>();
-    }
+    
 
     int size() {
         return this.storage.size();
