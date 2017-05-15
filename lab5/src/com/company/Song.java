@@ -27,7 +27,7 @@ class Song {
         this.genre = gen;
     }
 
-    private String getName() {
+    String getName() {
         return this.name;
     }
 
