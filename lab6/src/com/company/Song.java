@@ -1,45 +1,47 @@
 package com.company;
 
-class Song {
-    private int length;
-    private String name;
-    private String genre;
+class Song extends MusicalObject {
 
-    Song(String name, String genre, int length) {
+    private String genre;
+    private String author;
+
+    Song(String name, String author, String genre, int length) {
         this.name = name;
+        this.author = author;
         this.genre = genre;
         this.length = length;
     }
 
-    int getLength() {
-        return this.length;
+    public String getGenre() {
+        return genre;
     }
 
-    void setLength(int len) {
-        this.length = len;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
-    String getGenre() {
-        return this.genre;
+    public String getAuthor() {
+        return author;
     }
 
-    void setGenre(String gen) {
-        this.genre = gen;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    String getName() {
-        return this.name;
+    @Override
+    public String toString() {
+        return "Song{" +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", genre='" + genre + '\'' +
+                ", length=" + length + "ms" +
+                '}';
     }
 
-    void setName(String nam) {
-        this.genre = nam;
-    }
-
-    int compareTo(Song t) {
-        return this.getGenre().compareTo(t.getGenre());
-    }
-
+    @Override
     void print() {
-        System.out.println('"' + this.getName() + '"' + "    " + this.getGenre() + " " + this.getLength());
+        System.out.println("\"" + this.getName() + " - " + this.getAuthor() + "\"" + "\t" + this.getGenre() + " " + this.getLength());
     }
+
+
 }
