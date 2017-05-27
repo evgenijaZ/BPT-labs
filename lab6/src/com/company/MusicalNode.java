@@ -1,48 +1,57 @@
 package com.company;
 
 public class MusicalNode<T> {
-
-    private MusicalNode next;
-    private MusicalNode previous;
-    private T t;
+    private MusicalNode <T> next;
+    private T value;
 
     MusicalNode() {
         this.next = null;
-        this.previous = null;
     }
 
-    MusicalNode(T t) {
-        this.t = t;
-        this.next = null;
-        this.previous = null;
+    MusicalNode(Object o) {
+        if (o != null) {
+            this.value = (T) o;
+            this.next = null;
+        }
     }
 
-    MusicalNode(MusicalNode previous) {
-        this.next = null;
-        this.previous = previous;
+
+    boolean hasNext() {
+        return !(next == null);
     }
 
     MusicalNode getNext() {
         return next;
     }
 
-    public void setNext(MusicalNode next) {
+    void setNext(MusicalNode<T> next) {
         this.next = next;
     }
 
-    public MusicalNode getPrevious() {
-        return previous;
+    T getValue() {
+        return value;
     }
 
-    public void setPrevious(MusicalNode previous) {
-        this.previous = previous;
+    void setValue(T value) {
+        this.value = value;
     }
 
-    T getT() {
-        return t;
+    @Override
+    public String toString() {
+        return value.toString();
     }
 
-    void setT(T t) {
-        this.t = t;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(getClass() == obj.getClass()))
+            return false;
+        else {
+            MusicalNode tmp = (MusicalNode) obj;
+            return tmp.toString().equals(this.toString());
+        }
     }
 }
