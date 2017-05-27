@@ -1,62 +1,137 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
+import java.util.function.UnaryOperator;
 
-class Album {
-    private ArrayList <Song> storage;
-    private ArrayList <Song> searchResult;
+class Album <T> implements List {
+    private MusicalNode First = null;
+    private MusicalNode Last = null;
+    private int size = 0;
 
-    public Album() {
-        if (this.storage == null)
-            this.storage = new ArrayList <>();
+
+    @Override
+    public int size() {
+        return 0;
     }
 
-    ArrayList <Song> getSearchResult() {
-        return searchResult;
+    @Override
+    public boolean isEmpty() {
+        return false;
     }
 
-    Song getSearchResult(int i) {
-        return searchResult.get(i);
+    @Override
+    public boolean contains(Object o) {
+        return false;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return null;
+    }
+
+    @Override
+    public Object[] toArray() {
+        return new Object[0];
+    }
+
+    @Override
+    public boolean add(Object o) {
+        return false;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(Collection c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(int index, Collection c) {
+        return false;
+    }
+
+    @Override
+    public void replaceAll(UnaryOperator operator) {
+
+    }
+
+    @Override
+    public void sort(Comparator c) {
+
+    }
+
+    @Override
+    public void clear() {
+
+    }
+
+    @Override
+    public Object get(int index) {
+        return null;
+    }
+
+    @Override
+    public Object set(int index, Object element) {
+        return null;
+    }
+
+    @Override
+    public void add(int index, Object element) {
+
+    }
+
+    @Override
+    public Object remove(int index) {
+        return null;
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        return 0;
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        return 0;
+    }
+
+    @Override
+    public ListIterator listIterator() {
+        return null;
+    }
+
+    @Override
+    public ListIterator listIterator(int index) {
+        return null;
+    }
+
+    @Override
+    public List subList(int fromIndex, int toIndex) {
+        return null;
     }
 
 
-    int size() {
-        return this.storage.size();
+    @Override
+    public boolean retainAll(Collection c) {
+        return false;
     }
 
-    Song get(int index) {
-        return this.storage.get(index);
+    @Override
+    public boolean removeAll(Collection c) {
+        return false;
     }
 
-    public void set(int index, Song song) {
-        storage.set(index, song);
+    @Override
+    public boolean containsAll(Collection c) {
+        return false;
     }
 
-    void add(String name, String genre, int length) {
-        storage.add(new Song(name, genre, length));
+    @Override
+    public Object[] toArray(Object[] a) {
+        return new Object[0];
     }
-
-    int totalLength() {
-        int total = 0;
-        for (Song t : storage) {
-            total += t.getLength();
-        }
-        return total;
-    }
-
-    ArrayList <Song> search(int a, int b) {
-        this.searchResult = new ArrayList <>();
-        for (Song t : storage) {
-            if ((t.getLength() <= b) && (t.getLength() >= a)) {
-                searchResult.add(t);
-            }
-        }
-        return searchResult;
-    }
-
-    void sort() {
-        storage.sort(Comparator.comparing(Song::getGenre));
-    }
-
 }
