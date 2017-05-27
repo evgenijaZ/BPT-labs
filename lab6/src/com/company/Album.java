@@ -3,30 +3,67 @@ package com.company;
 import java.util.*;
 import java.util.function.UnaryOperator;
 
-class Album <T> implements List {
-    private MusicalNode First = null;
-    private MusicalNode Last = null;
+class Album<E extends Song> implements List {
+    public MusicalNode <E> head = null;
     private int size = 0;
 
+    @Override
+    public String toString() {
+        return "Album{" +
+                "head=" + head +
+                ", size=" + size +
+                '}';
+    }
+
+    public void print() {
+        MusicalNode tmp = head;
+        while (tmp!=null){
+            System.out.println(tmp.toString());
+            tmp = tmp.getNext();
+        }
+
+    }
 
     @Override
     public int size() {
-        return 0;
+        return this.size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size() == 0;
     }
+
 
     @Override
     public boolean contains(Object o) {
+        if (o != null) {
+            for (Object o1 : this) {
+                if (o.equals(o1))
+                    return true;
+            }
+        }
         return false;
     }
 
     @Override
-    public Iterator iterator() {
-        return null;
+    public Iterator <E> iterator() {
+        return new Iterator <E>() {
+            private MusicalNode <E> current = head;
+
+            @Override
+            public boolean hasNext() {
+                return current.hasNext();
+            }
+
+            @Override
+            public E next() throws IndexOutOfBoundsException {
+                E result = current.getValue();
+                if (!current.hasNext()) throw new IndexOutOfBoundsException("End of list.");
+                current = current.getNext();
+                return result;
+            }
+        };
     }
 
     @Override
@@ -36,11 +73,40 @@ class Album <T> implements List {
 
     @Override
     public boolean add(Object o) {
-        return false;
+        if (o != null) {
+            if (size == 0 || head == null) {
+                head = new MusicalNode <>(o);
+            } else {
+                MusicalNode temp = new MusicalNode <>(o);
+                temp.setNext(head);
+                head = temp;
+            }
+            size++;
+//            System.out.println(head.toString());
+            return true;
+        } else
+            return false;
     }
 
     @Override
     public boolean remove(Object o) {
+        if (o != null && MusicalNode.class == o.getClass()) {
+            if (head.equals(o)) {
+                head = head.getNext();
+            } else {
+                MusicalNode tmp=head;
+                while (tmp.hasNext()){
+                    if(tmp.getNext().equals(o))
+                    {
+                        tmp.setNext(tmp.getNext().getNext());
+                        break;
+                    }
+                    tmp = tmp.getNext();
+                }
+            }
+            size--;
+            return true;
+        }
         return false;
     }
 
