@@ -44,4 +44,22 @@ class Song extends MusicalObject {
     }
 
 
+    @Override
+    public boolean equals(Object obj) {
+        {
+            if (obj == this)
+                return true;
+            if (obj == null)
+                return false;
+            if (!(getClass() == obj.getClass()))
+                return false;
+            else {
+                Song tmp = (Song) obj;
+                if (tmp.name == this.name && tmp.author == this.author && tmp.genre == this.genre && tmp.length == this.length)
+                    return true;
+                else
+                    return false;
+            }
+        }
+    }
 }
