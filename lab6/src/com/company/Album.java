@@ -3,8 +3,9 @@ package com.company;
 import java.util.*;
 import java.util.function.UnaryOperator;
 
+@SuppressWarnings("unchecked")
 class Album<E extends Song> implements List {
-    public MusicalNode <E> head = null;
+    private MusicalNode <E> head = null;
     private int size = 0;
 
     @Override
@@ -15,9 +16,9 @@ class Album<E extends Song> implements List {
                 '}';
     }
 
-    public void print() {
+    void print() {
         MusicalNode tmp = head;
-        while (tmp!=null){
+        while (tmp != null) {
             System.out.println(tmp.toString());
             tmp = tmp.getNext();
         }
@@ -38,9 +39,10 @@ class Album<E extends Song> implements List {
     @Override
     public boolean contains(Object o) {
         if (o != null) {
-            for (Object o1 : this) {
-                if (o.equals(o1))
-                    return true;
+            MusicalNode temp = head;
+            while (temp != null) {
+                if (temp.equals(o)) return true;
+                temp = temp.getNext();
             }
         }
         return false;
@@ -48,22 +50,23 @@ class Album<E extends Song> implements List {
 
     @Override
     public Iterator <E> iterator() {
-        return new Iterator <E>() {
-            private MusicalNode <E> current = head;
-
-            @Override
-            public boolean hasNext() {
-                return current.hasNext();
-            }
-
-            @Override
-            public E next() throws IndexOutOfBoundsException {
-                E result = current.getValue();
-                if (!current.hasNext()) throw new IndexOutOfBoundsException("End of list.");
-                current = current.getNext();
-                return result;
-            }
-        };
+//        return new Iterator <E>() {
+//            private MusicalNode <E> current = head;
+//
+//            @Override
+//            public boolean hasNext() {
+//                return current.hasNext();
+//            }
+//
+//            @Override
+//            public E next() throws IndexOutOfBoundsException {
+//                E result =  current.getValue();
+//                if (!current.hasNext()) throw new IndexOutOfBoundsException("End of list.");
+//                current =  current.getNext();
+//                return result;
+//            }
+//        };
+        return null;
     }
 
     @Override
@@ -94,10 +97,9 @@ class Album<E extends Song> implements List {
             if (head.equals(o)) {
                 head = head.getNext();
             } else {
-                MusicalNode tmp=head;
-                while (tmp.hasNext()){
-                    if(tmp.getNext().equals(o))
-                    {
+                MusicalNode tmp = head;
+                while (tmp.hasNext()) {
+                    if (tmp.getNext().equals(o)) {
                         tmp.setNext(tmp.getNext().getNext());
                         break;
                     }
@@ -137,6 +139,14 @@ class Album<E extends Song> implements List {
 
     @Override
     public Object get(int index) {
+        if (index < size()) {
+            MusicalNode temp = head;
+            while (index > 0 && temp != null) {
+                index--;
+                temp = temp.getNext();
+            }
+            return temp;
+        }
         return null;
     }
 
@@ -152,12 +162,35 @@ class Album<E extends Song> implements List {
 
     @Override
     public Object remove(int index) {
+        if (index < size()) {
+            MusicalNode temp = head;
+            MusicalNode result = null;
+            while (index > 0 && temp != null) {
+                if (index == 1) {
+                    result = temp.getNext();
+                    temp.setNext(temp.getNext().getNext());
+                }
+                temp = temp.getNext();
+                index--;
+            }
+            size--;
+            return result;
+        }
         return null;
     }
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        if (o != null) {
+            int index = 0;
+            MusicalNode temp = head;
+            while (temp != null) {
+                if (temp.equals(o)) return index;
+                index++;
+                temp = temp.getNext();
+            }
+        }
+        return -1;
     }
 
     @Override
