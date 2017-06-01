@@ -3,6 +3,7 @@ package com.company;
 abstract class MusicalObject {
     protected String name;
     protected int length;
+
     abstract void print();
 
     public String getName() {
