@@ -1,7 +1,7 @@
 package com.company;
 
 public class MusicalNode<T> {
-    private MusicalNode <T> next;
+    private MusicalNode <?> next;
     private T value;
 
     MusicalNode() {
@@ -24,7 +24,7 @@ public class MusicalNode<T> {
         return next;
     }
 
-    void setNext(MusicalNode<T> next) {
+    void setNext(MusicalNode <?> next) {
         this.next = next;
     }
 
