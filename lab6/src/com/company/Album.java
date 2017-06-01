@@ -3,9 +3,9 @@ package com.company;
 import java.util.*;
 import java.util.function.UnaryOperator;
 
-@SuppressWarnings("unchecked")
+//@SuppressWarnings("unchecked")
 class Album<E extends Song> implements List {
-    private MusicalNode <E> head = null;
+    private MusicalNode <?> head = null;
     private int size = 0;
 
     @Override
@@ -71,21 +71,27 @@ class Album<E extends Song> implements List {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        MusicalNode item = head;
+        Object[] array = new Object[size];
+        int i = 0;
+        while (item != null && i < size) {
+            array[i] = item;
+            item = item.getNext();
+        }
+        return array;
     }
 
     @Override
     public boolean add(Object o) {
         if (o != null) {
             if (size == 0 || head == null) {
-                head = new MusicalNode <>(o);
+                head = new MusicalNode <E>(o);
             } else {
                 MusicalNode temp = new MusicalNode <>(o);
                 temp.setNext(head);
                 head = temp;
             }
             size++;
-//            System.out.println(head.toString());
             return true;
         } else
             return false;
@@ -134,7 +140,8 @@ class Album<E extends Song> implements List {
 
     @Override
     public void clear() {
-
+        head = null;
+        size = 0;
     }
 
     @Override
@@ -195,7 +202,18 @@ class Album<E extends Song> implements List {
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        if (o != null) {
+            int index = 0;
+            int result = index;
+            MusicalNode temp = head;
+            while (temp != null) {
+                if (temp.equals(o)) result = index;
+                index++;
+                temp = temp.getNext();
+            }
+            return result;
+        }
+        return -1;
     }
 
     @Override
