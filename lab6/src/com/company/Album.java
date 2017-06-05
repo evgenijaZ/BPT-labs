@@ -18,9 +18,11 @@ class Album<E extends Song> implements List {
 
     void print() {
         MusicalNode tmp = head;
+        int i = 0;
         while (tmp != null) {
-            System.out.println(tmp.toString());
+            System.out.println(i + ": " + tmp.toString());
             tmp = tmp.getNext();
+            i++;
         }
 
     }
@@ -38,14 +40,7 @@ class Album<E extends Song> implements List {
 
     @Override
     public boolean contains(Object o) {
-        if (o != null) {
-            MusicalNode temp = head;
-            while (temp != null) {
-                if (temp.equals(o)) return true;
-                temp = temp.getNext();
-            }
-        }
-        return false;
+        return indexOf(o) >= 0;
     }
 
     @Override
@@ -120,12 +115,26 @@ class Album<E extends Song> implements List {
 
     @Override
     public boolean addAll(Collection c) {
-        return false;
+        Objects.requireNonNull(c, "Collection" + c + "cannot be null!");
+        Object[] collection = c.toArray();
+        boolean result = false;
+        for (int i = 0; i < c.size(); i++) {
+            result &= this.add(collection[i]);
+        }
+        return result;
     }
 
     @Override
     public boolean addAll(int index, Collection c) {
-        return false;
+        if(index>= size) return false;
+        Objects.requireNonNull(c, "Collection" + c + "cannot be null!");
+        Object[] collection = c.toArray();
+        boolean result = false;
+        for (int i = 0; i < c.size(); i++) {
+            this.add(index, collection[i]);
+            index++;
+        }
+        return true;
     }
 
     @Override
@@ -135,7 +144,6 @@ class Album<E extends Song> implements List {
 
     @Override
     public void sort(Comparator c) {
-
     }
 
     @Override
@@ -159,12 +167,35 @@ class Album<E extends Song> implements List {
 
     @Override
     public Object set(int index, Object element) {
-        return null;
+        Objects.requireNonNull(element, "Collection" + element + "cannot be null!");
+        MusicalNode newNode = new MusicalNode(element);
+        if(index>= size) return null;
+        Object oldNode = get(index);
+        this.add(index, element);
+        this.remove(index+1);
+        return oldNode;
     }
 
     @Override
     public void add(int index, Object element) {
-
+        Objects.requireNonNull(element, "Object" + element + "cannot be null!");
+        if (size == 0 || head == null) {
+            if (index == 0)
+                head = new MusicalNode <E>(element);
+            else return;
+        } else {
+            MusicalNode temp = head;
+            while (temp != null) {
+                if (index == indexOf(temp.getNext())) {
+                    MusicalNode <E> newElement = new MusicalNode <>(element);
+                    newElement.setNext(temp.getNext());
+                    temp.setNext(newElement);
+                    size++;
+                    return;
+                }
+                temp = temp.getNext();
+            }
+        }
     }
 
     @Override
@@ -202,18 +233,16 @@ class Album<E extends Song> implements List {
 
     @Override
     public int lastIndexOf(Object o) {
-        if (o != null) {
-            int index = 0;
-            int result = index;
-            MusicalNode temp = head;
-            while (temp != null) {
-                if (temp.equals(o)) result = index;
-                index++;
-                temp = temp.getNext();
-            }
-            return result;
+        Objects.requireNonNull(o, "Object" + o + "cannot be null!");
+        int index = 0;
+        int result = -1;
+        MusicalNode temp = head;
+        while (temp != null) {
+            if (temp.equals(o)) result = index;
+            index++;
+            temp = temp.getNext();
         }
-        return -1;
+        return result;
     }
 
     @Override
