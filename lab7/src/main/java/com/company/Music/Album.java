@@ -4,8 +4,8 @@ import java.util.*;
 import java.util.function.UnaryOperator;
 
 public class Album<E extends Song> implements List {
-    private MusicalNode <?> head = null;
-    private int size = 0;
+    private MusicalNode <?> head = null; //указатель на вершину списка
+    private int size = 0; //размер
 
     public Album() {
         head = null;
@@ -42,24 +42,24 @@ public class Album<E extends Song> implements List {
     }
 
     @Override
-    public int size() {
+    public int size() { //размер
         return this.size;
     }
 
     @Override
-    public boolean isEmpty() {
+    public boolean isEmpty() { //true, если список пустой
         return size() == 0;
     }
 
 
     @Override
-    public boolean contains(Object o) {
-        return indexOf(o) >= 0;
+    public boolean contains(Object obj) {  //true, если список содержит в себе оbj
+        return indexOf(obj) >= 0;
     }
 
 
     @Override
-    public Object[] toArray() {
+    public Object[] toArray() { // возвращает массив всех объектов списка
         MusicalNode item = head;
         Object[] array = new Object[size];
         int i = 0;
@@ -71,7 +71,7 @@ public class Album<E extends Song> implements List {
     }
 
     @Override
-    public boolean add(Object o) {
+    public boolean add(Object o) {  //добавить объект; true,если успешно
         if (o != null) {
             if (MusicalNode.class != o.getClass()) return false;
             if (size == 0 || head == null) {
@@ -88,7 +88,7 @@ public class Album<E extends Song> implements List {
     }
 
     @Override
-    public boolean remove(Object o) {
+    public boolean remove(Object o) { //удалить объект; true,если успешно
         if (size != 0 && o != null && MusicalNode.class == o.getClass()) {
             if (head.equals(o)) {
                 if (size > 1) {
@@ -114,7 +114,7 @@ public class Album<E extends Song> implements List {
     }
 
     @Override
-    public boolean addAll(Collection c) {
+    public boolean addAll(Collection c) { //добавить коллекцию в список; true,если успешно
         if (c != null) {
             Object[] collection = c.toArray();
             boolean result = false;
@@ -126,7 +126,7 @@ public class Album<E extends Song> implements List {
     }
 
     @Override
-    public boolean addAll(int index, Collection c) {
+    public boolean addAll(int index, Collection c) { //добавить коллекцию начиная с индекса index; true,если успешно
         if (index >= size) return false;
         Objects.requireNonNull(c, "Collection" + c + "cannot be null!");
         Object[] collection = c.toArray();
@@ -139,13 +139,13 @@ public class Album<E extends Song> implements List {
     }
 
     @Override
-    public void clear() {
+    public void clear() { //очистить список
         head = null;
         size = 0;
     }
 
     @Override
-    public Object get(int index) {
+    public Object get(int index) { //возвращает объект по индексу
         if (index < size()) {
             MusicalNode temp = head;
             while (index > 0 && temp != null) {
@@ -158,7 +158,7 @@ public class Album<E extends Song> implements List {
     }
 
     @Override
-    public Object set(int index, Object element) {
+    public Object set(int index, Object element) { //установить новое значение элемента по индексу, возвращает старое значение
         Objects.requireNonNull(element, "Collection" + element + "cannot be null!");
         MusicalNode newNode = new MusicalNode(element);
         if (index >= size) return null;
@@ -169,12 +169,11 @@ public class Album<E extends Song> implements List {
     }
 
     @Override
-    public void add(int index, Object element) {
+    public void add(int index, Object element) { //добавить элемент по индексу
         Objects.requireNonNull(element, "Object" + element + "cannot be null!");
         if (size == 0 || head == null) {
             if (index == 0)
                 head = new MusicalNode <E>(element);
-            else return;
         } else {
             MusicalNode temp = head;
             while (temp != null) {
@@ -191,7 +190,7 @@ public class Album<E extends Song> implements List {
     }
 
     @Override
-    public Object remove(int index) {
+    public Object remove(int index) { //удалить элемент по индексу, возвращает удаленный объект
         if (index < size()) {
             MusicalNode temp = head;
             MusicalNode result = null;
@@ -210,7 +209,7 @@ public class Album<E extends Song> implements List {
     }
 
     @Override
-    public int indexOf(Object o) {
+    public int indexOf(Object o) { //возвращает индекс первого вхождения объекта в списке, -1, если отсутсвует
         if (o != null) {
             int index = 0;
             MusicalNode temp = head;
@@ -224,7 +223,7 @@ public class Album<E extends Song> implements List {
     }
 
     @Override
-    public int lastIndexOf(Object o) {
+    public int lastIndexOf(Object o) { //возвращает последний индекс объекта в списке, -1, если отсутвует
         Objects.requireNonNull(o, "Object" + o + "cannot be null!");
         int index = 0;
         int result = -1;
@@ -238,7 +237,7 @@ public class Album<E extends Song> implements List {
     }
 
 
-    public int totalLength() {
+    public int totalLength() { //возвращает суммарную длину треков списка
         int total = 0;
         MusicalNode temp = head;
         while (temp != null) {
@@ -248,7 +247,7 @@ public class Album<E extends Song> implements List {
         return total;
     }
 
-    public ArrayList <MusicalNode> search(int a, int b) {
+    public ArrayList <MusicalNode> search(int a, int b) { //возвращает список, содержащий элементы, длина которых в диавазоне (a;b)
         ArrayList <MusicalNode> searchResult = new ArrayList <>();
 
         MusicalNode temp = head;
@@ -263,7 +262,7 @@ public class Album<E extends Song> implements List {
         return searchResult;
     }
 
-    public ArrayList <E> sort() {
+    public ArrayList <E> sort() { //сортировка
         ArrayList <E> storage = new ArrayList <>();
         MusicalNode temp = head;
         while (temp != null) {
@@ -302,9 +301,9 @@ public class Album<E extends Song> implements List {
     }
 
     @Override
-    public boolean containsAll(Collection c) {
-        ArrayList <MusicalNode> storage = new ArrayList <>(c);
-        for (MusicalNode aStorage : storage) {
+    public boolean containsAll(Collection c) { //true, если список содержит все элементы коллкции
+        ArrayList storage = new ArrayList <>(c);
+        for (Object aStorage : storage) {
             if (!this.contains(aStorage))
                 return false;
         }

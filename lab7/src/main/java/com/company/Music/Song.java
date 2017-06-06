@@ -1,11 +1,11 @@
 package main.java.com.company.Music;
 
-public class Song extends MusicalObject {
+public class Song extends MusicalObject { //песня, наследник абстрактного класса
 
-    private String genre;
-    private String author;
+    private String genre; //жанр
+    private String author; //автор
 
-    public Song(String name, String author, String genre, int length) {
+    public Song(String name, String author, String genre, int length) {  //конструктор
         this.name = name;
         this.author = author;
         this.genre = genre;
@@ -29,7 +29,7 @@ public class Song extends MusicalObject {
     }
 
     @Override
-    public String toString() {
+    public String toString() { //перегруженный виртуальный метод toString()
         return "Song{" +
                 "name='" + name + '\'' +
                 ", author='" + author + '\'' +
@@ -39,13 +39,13 @@ public class Song extends MusicalObject {
     }
 
     @Override
-    public void print() {
+    public void print() { //реализация абстрактного метода
         System.out.println("\"" + this.getName() + " - " + this.getAuthor() + "\"" + "\t" + this.getGenre() + " " + this.getLength());
     }
 
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj) { //перегруженный виртуальный метод equals()
         {
             if (obj == this)
                 return true;
