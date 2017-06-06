@@ -3,10 +3,24 @@ package com.company;
 import java.util.*;
 import java.util.function.UnaryOperator;
 
-//@SuppressWarnings("unchecked")
 class Album<E extends Song> implements List {
     private MusicalNode <?> head = null;
     private int size = 0;
+
+    Album() {
+        head = null;
+        size = 0;
+    }
+
+    Album(Object o) {
+        head = new MusicalNode <>(o);
+        size = 1;
+    }
+
+    Album(Collection <E> c) {
+        this.addAll(c);
+        size = c.size();
+    }
 
     @Override
     public String toString() {
@@ -43,26 +57,6 @@ class Album<E extends Song> implements List {
         return indexOf(o) >= 0;
     }
 
-    @Override
-    public Iterator <E> iterator() {
-//        return new Iterator <E>() {
-//            private MusicalNode <E> current = head;
-//
-//            @Override
-//            public boolean hasNext() {
-//                return current.hasNext();
-//            }
-//
-//            @Override
-//            public E next() throws IndexOutOfBoundsException {
-//                E result =  current.getValue();
-//                if (!current.hasNext()) throw new IndexOutOfBoundsException("End of list.");
-//                current =  current.getNext();
-//                return result;
-//            }
-//        };
-        return null;
-    }
 
     @Override
     public Object[] toArray() {
@@ -115,18 +109,19 @@ class Album<E extends Song> implements List {
 
     @Override
     public boolean addAll(Collection c) {
-        Objects.requireNonNull(c, "Collection" + c + "cannot be null!");
-        Object[] collection = c.toArray();
-        boolean result = false;
-        for (int i = 0; i < c.size(); i++) {
-            result &= this.add(collection[i]);
-        }
-        return result;
+        if (c != null) {
+            Object[] collection = c.toArray();
+            boolean result = false;
+            for (int i = 0; i < c.size(); i++) {
+                result &= this.add(collection[i]);
+            }
+            return result;
+        } else return false;
     }
 
     @Override
     public boolean addAll(int index, Collection c) {
-        if(index>= size) return false;
+        if (index >= size) return false;
         Objects.requireNonNull(c, "Collection" + c + "cannot be null!");
         Object[] collection = c.toArray();
         boolean result = false;
@@ -135,15 +130,6 @@ class Album<E extends Song> implements List {
             index++;
         }
         return true;
-    }
-
-    @Override
-    public void replaceAll(UnaryOperator operator) {
-
-    }
-
-    @Override
-    public void sort(Comparator c) {
     }
 
     @Override
@@ -169,10 +155,10 @@ class Album<E extends Song> implements List {
     public Object set(int index, Object element) {
         Objects.requireNonNull(element, "Collection" + element + "cannot be null!");
         MusicalNode newNode = new MusicalNode(element);
-        if(index>= size) return null;
+        if (index >= size) return null;
         Object oldNode = get(index);
         this.add(index, element);
-        this.remove(index+1);
+        this.remove(index + 1);
         return oldNode;
     }
 
@@ -279,5 +265,35 @@ class Album<E extends Song> implements List {
     @Override
     public Object[] toArray(Object[] a) {
         return new Object[0];
+    }
+
+    @Override
+    public void replaceAll(UnaryOperator operator) {
+    }
+
+    @Override
+    public void sort(Comparator c) {
+    }
+
+
+    @Override
+    public Iterator <E> iterator() {
+//        return new Iterator <E>() {
+//            private MusicalNode <E> current = head;
+//
+//            @Override
+//            public boolean hasNext() {
+//                return current.hasNext();
+//            }
+//
+//            @Override
+//            public E next() throws IndexOutOfBoundsException {
+//                E result =  current.getValue();
+//                if (!current.hasNext()) throw new IndexOutOfBoundsException("End of list.");
+//                current =  current.getNext();
+//                return result;
+//            }
+//        };
+        return null;
     }
 }
