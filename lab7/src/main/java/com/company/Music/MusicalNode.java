@@ -1,6 +1,6 @@
 package main.java.com.company.Music;
 
-public class MusicalNode<T extends Song> { //обобщенный класс, элемент коллекции Альбом
+public class MusicalNode<T> { //обобщенный класс, элемент коллекции Альбом
     private MusicalNode <?> next; //указатель на следующий элемент в списке
     private T value; //значение
 

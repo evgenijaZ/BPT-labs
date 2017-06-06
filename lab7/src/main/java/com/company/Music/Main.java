@@ -14,6 +14,7 @@ public class Main {
         album.add(node3);
         album.add(node2);
         album.add(node1);
+        album.print();
     }
 
 }

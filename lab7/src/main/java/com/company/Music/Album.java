@@ -71,9 +71,8 @@ public class Album<E extends Song> implements List {
     }
 
     @Override
-    public boolean add(Object o) {  //добавить объект; true,если успешно
+    public boolean add(Object o) {
         if (o != null) {
-            if (MusicalNode.class != o.getClass()) return false;
             if (size == 0 || head == null) {
                 head = new MusicalNode <E>(o);
             } else {
@@ -262,15 +261,19 @@ public class Album<E extends Song> implements List {
         return searchResult;
     }
 
-    public ArrayList <E> sort() { //сортировка
-        ArrayList <E> storage = new ArrayList <>();
+    public void sort() { //сортировка
+        ArrayList <Song> storage = new ArrayList <>();
         MusicalNode temp = head;
         while (temp != null) {
-            storage.add((E) temp.getValue());
+            Song r = (E) (temp.getValue());
+            storage.add(r);
             temp = temp.getNext();
         }
-        storage.sort(Comparator.comparing(Song::getGenre));
-        return storage;
+        storage.sort(Comparator.comparing(Song::getLength));
+        this.clear();
+        for (Song aStorage : storage) {
+            this.add(aStorage);
+        }
     }
 
 
