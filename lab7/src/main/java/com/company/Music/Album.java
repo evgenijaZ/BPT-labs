@@ -30,14 +30,14 @@ public class Album<E extends Song> implements List {
                 '}';
     }
 
-    public void print() {
-        MusicalNode tmp = head;
+    public void print() { //печать элементов списка
         int i = 0;
-        while (tmp != null) {
-            System.out.println(i + ": " + tmp.toString());
-            tmp = tmp.getNext();
+        Iterator <MusicalNode> it = iterator();
+        while (it.hasNext()) {
+            System.out.println(i + ": " + it.next().toString());
             i++;
         }
+        System.out.println(i + ": " + it.next().toString());
 
     }
 
@@ -72,7 +72,7 @@ public class Album<E extends Song> implements List {
 
     @Override
     public boolean add(Object o) {
-        if (o != null) {
+        if (o != null && o.getClass() == MusicalNode.class) {
             if (size == 0 || head == null) {
                 head = new MusicalNode <E>(o);
             } else {
@@ -328,23 +328,22 @@ public class Album<E extends Song> implements List {
 
 
     @Override
-    public Iterator <E> iterator() {
-//        return new Iterator <E>() {
-//            private MusicalNode <E> current = head;
-//
-//            @Override
-//            public boolean hasNext() {
-//                return current.hasNext();
-//            }
-//
-//            @Override
-//            public E next() throws IndexOutOfBoundsException {
-//                E result =  current.getValue();
-//                if (!current.hasNext()) throw new IndexOutOfBoundsException("End of list.");
-//                current =  current.getNext();
-//                return result;
-//            }
-//        };
-        return null;
+    public Iterator <MusicalNode> iterator() {
+        return new Iterator <MusicalNode>() {
+            private MusicalNode current = head;
+
+            @Override
+            public boolean hasNext() {
+                return current.hasNext();
+            }
+
+            @Override
+            public MusicalNode next() {
+                MusicalNode result  = current;
+                current = current.getNext();
+                return result;
+            }
+
+        };
     }
 }
