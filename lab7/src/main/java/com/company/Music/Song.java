@@ -1,6 +1,8 @@
 package main.java.com.company.Music;
 
-public class Song extends MusicalObject { //песня, наследник абстрактного класса
+import java.io.Serializable;
+
+public class Song extends MusicalObject  implements Serializable { //песня, наследник абстрактного класса
 
     private String genre; //жанр
     private String author; //автор
@@ -11,6 +13,8 @@ public class Song extends MusicalObject { //песня, наследник аб�
         this.genre = genre;
         this.length = length;
     }
+
+
 
     public String getGenre() {
         return genre;

@@ -1,6 +1,7 @@
 package main.java.com.company.Music;
+import java.io.Serializable;
 
-public class MusicalNode<T> { //обобщенный класс, элемент коллекции Альбом
+public class MusicalNode<T>  implements Serializable { //обобщенный класс, элемент коллекции Альбом
     private MusicalNode <?> next; //указатель на следующий элемент в списке
     private T value; //значение
 

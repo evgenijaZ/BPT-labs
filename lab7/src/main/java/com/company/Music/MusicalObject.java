@@ -1,6 +1,8 @@
 package main.java.com.company.Music;
 
-abstract class MusicalObject { //абстрактный класс
+import java.io.Serializable;
+
+abstract class MusicalObject implements Serializable{ //абстрактный класс
     String name; // название композиции
     int length; // длина композиции
 
