@@ -2,8 +2,9 @@ package main.java.com.company.Music;
 
 import java.util.*;
 import java.util.function.UnaryOperator;
+import java.io.Serializable;
 
-public class Album<E extends Song> implements List {
+public class Album<E extends Song> implements List, Serializable {
     private MusicalNode <?> head = null; //указатель на вершину списка
     private int size = 0; //размер
 
@@ -32,6 +33,7 @@ public class Album<E extends Song> implements List {
 
     public void print() { //печать элементов списка
         int i = 0;
+        if (size == 0) return;
         Iterator <MusicalNode> it = iterator();
         while (it.hasNext()) {
             System.out.println(i + ": " + it.next().toString());
@@ -70,6 +72,15 @@ public class Album<E extends Song> implements List {
         return array;
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if(!(obj instanceof Album)) return  false;
+        Album album = (Album) obj;
+            for (int i = 0; i<this.size(); i++){
+                if(!this.get(i).equals(album.get(i)))  return false;
+            }
+        return true;
+    }
     @Override
     public boolean add(Object o) {
         if (o != null && o.getClass() == MusicalNode.class) {
