@@ -35,10 +35,10 @@ public class Song extends MusicalObject  implements Serializable { //песня,
     @Override
     public String toString() { //перегруженный виртуальный метод toString()
         return "Song{" +
-                "name='" + name + '\'' +
-                ", author='" + author + '\'' +
-                ", genre='" + genre + '\'' +
-                ", length=" + length + "ms" +
+                "name=" + name +
+                ",author=" + author  +
+                ",genre=" + genre +
+                ",length=" + length  +
                 '}';
     }
 
