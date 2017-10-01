@@ -1,9 +1,9 @@
 package main.java.com.company.Music;
 import java.io.Serializable;
 
-public class MusicalNode<T>  implements Serializable { //обобщенный класс, элемент коллекции Альбом
+public class MusicalNode<E>  implements Serializable { //обобщенный класс, элемент коллекции Альбом
     private MusicalNode <?> next; //указатель на следующий элемент в списке
-    private T value; //значение
+    private E value; //значение
 
     MusicalNode() {
         this.next = null;
@@ -11,8 +11,9 @@ public class MusicalNode<T>  implements Serializable { //обобщенный к
 
     public MusicalNode(Object o) {
         if (o != null) {
-            this.value = (T) o;
+            this.value = (E) o;
             this.next = null;
+
         }
     }
 
@@ -29,11 +30,11 @@ public class MusicalNode<T>  implements Serializable { //обобщенный к
         this.next = next;
     }
 
-    T getValue() {
+    E getValue() {
         return value;
     }
 
-    public void setValue(T value) {
+    public void setValue(E value) {
         this.value = value;
     }
 
